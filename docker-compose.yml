@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      target: dev
+    container_name: wordpress_web
+    restart: always
+    ports:
+      - '8080:80'
+    depends_on:
+      - db
+    volumes:
+      - './src:/var/www/html/src'
+      - './.env:/var/www/html/.env'
+      - './.htaccess:/var/www/html/.htaccess'
+      - './composer.json:/var/www/html/composer.json'
+      - './composer.lock:/var/www/html/composer.lock'
+      - './phpcs-rules-standard.xml:/var/www/html/phpcs-rules-standard.xml'
+      - './wp-config.php:/var/www/html/wp-config.php'
+      - './uploads/:/var/www/html/wp-content/uploads'
+  db:
+    image: 'mysql:8.1'
+    container_name: wordpress_db
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - 'db_data:/var/lib/mysql'
+volumes:
+  db_data: {}

@@ -1,0 +1,14 @@
+.DS_Store
+.vscode
+
+node_modules
+
+.env
+
+coverage
+sync
+vendor
+uploads
+
+dist
+src/plugins/**/build
