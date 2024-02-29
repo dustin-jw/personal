@@ -11,21 +11,22 @@ services:
     depends_on:
       - db
     volumes:
-      - './src:/var/www/html/src'
-      - './.env:/var/www/html/.env'
-      - './.htaccess:/var/www/html/.htaccess'
-      - './composer.json:/var/www/html/composer.json'
-      - './composer.lock:/var/www/html/composer.lock'
-      - './phpcs-rules-standard.xml:/var/www/html/phpcs-rules-standard.xml'
-      - './wp-config.php:/var/www/html/wp-config.php'
-      - './uploads/:/var/www/html/wp-content/uploads'
+      - ./src:/var/www/html/src
+      - ./.env:/var/www/html/.env
+      - ./.htaccess:/var/www/html/.htaccess
+      - ./composer.json:/var/www/html/composer.json
+      - ./composer.lock:/var/www/html/composer.lock
+      - ./phpcs-rules-standard.xml:/var/www/html/phpcs-rules-standard.xml
+      - ./wp-config.php:/var/www/html/wp-config.php
+      - ./uploads/:/var/www/html/wp-content/uploads
+      - ./dist/themes/midnight-thunder:/var/www/html/wp-content/themes/midnight-thunder
   db:
-    image: 'mysql:8.1'
+    image: mysql:8.1
     container_name: wordpress_db
     restart: always
     env_file:
       - .env
     volumes:
-      - 'db_data:/var/lib/mysql'
+      - db_data:/var/lib/mysql
 volumes:
   db_data: {}
